@@ -40,6 +40,7 @@ Launched both instances with key pair `desktop-key-pair-useast1`, attached the s
 EC2 Instances
 ```
 
+![EC2 Instances](../screenshots/03-ec2.png)
 
 
 ## Production hardening

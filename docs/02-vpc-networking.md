@@ -34,6 +34,7 @@ A flat network means one compromised host can reach everything. Splitting the VP
 ## Verification
 
 - Confirmed each subnet is associated with the intended route table
+ ![VPC Routes](../screenshots/02-vpc.png)
 
 ## Production hardening
 

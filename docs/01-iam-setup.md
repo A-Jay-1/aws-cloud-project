@@ -24,7 +24,7 @@ aws sts get-caller-identity
 
 Returns the admin user's ARN, not root. Also launched and terminated a test EC2 instance to confirm the account, CLI and key work.
 
-![IAM User Screenshot](./screenshots/01-iam.png)
+![IAM User Screenshot](../screenshots/01-iam.png)
 <!-- One screenshot: sts output with account ID redacted -->
 
 
