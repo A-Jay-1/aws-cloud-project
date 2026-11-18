@@ -1,6 +1,7 @@
 # AWS Cloud & Attacks 101: Secure Network Build
 
-A hands-on AWS project building a segmented, monitored production-style network, then layering detection and threat intelligence on top. Built following Grant Collins' *Cloud & Attacks 101* (projectsecurity). Where I deviated from or extended the course, it is called out in the docs.
+A hands-on AWS project building a segmented, monitored production-style network, then layering detection and threat intelligence on top. The initial builds are intentionally insecure, reflecting common mistakes made when provisioning cloud resources. These misconfigurations are then exploited to demonstrate their impact, and finally remediated to show how each flaw is fixed. 
+Built following Grant Collins' *Cloud & Attacks 101* (projectsecurity). Where I deviated from or extended the course, it is called out in the docs.
 
 **Status:** In progress (phases 1 to 3 of 7 complete)
 
@@ -32,15 +33,17 @@ A hands-on AWS project building a segmented, monitored production-style network,
 
 ## Progress
 
-| # | Phase | Status | Doc |
-|---|-------|--------|-----|
-| 1 | IAM setup | Done | [docs/01-iam-setup.md](docs/01-iam-setup.md) |
-| 2 | VPC networking | Done | [docs/02-vpc-networking.md](docs/02-vpc-networking.md) |
-| 3 | Compute: jumpbox and web server | Done | [docs/03-compute-jumpbox-web.md](docs/03-compute-jumpbox-web.md) |
-| 4 | Database | Planned | |
-| 5 | Monitoring and logging | Planned | |
-| 6 | Threat intelligence pipeline | Planned | |
-| 7 | SIEM integration | Planned | |
+| #   | Phase                           | Status      | Doc                                                              |
+| --- | ------------------------------- | ----------- | ---------------------------------------------------------------- |
+| 1   | IAM setup                       | Done        | [docs/01-iam-setup.md](docs/01-iam-setup.md)                     |
+| 2   | VPC networking                  | Done        | [docs/02-vpc-networking.md](docs/02-vpc-networking.md)           |
+| 3   | Compute: jumpbox and web server | Done        | [docs/03-compute-jumpbox-web.md](docs/03-compute-jumpbox-web.md) |
+| 4   | Database                        | Done        | [docs/04-database.md](docs/04-database.md)                       |
+| 5   | Monitoring and logging          | In progress |                                                                  |
+| 6   | SIEM integration                | In progress |                                                                  |
+| 7   | Threat intelligence pipeline    | Planned     |                                                                  |
+| 8   | Attacks                         | Planned     |                                                                  |
+| 9   | Remediations                    | Planned     |                                                                  |
 
 ## Key design decisions
 
@@ -48,7 +51,7 @@ A hands-on AWS project building a segmented, monitored production-style network,
 - **Private DB subnet:** the database has no route to the IGW, so it cannot be reached from the internet even if a security group is misconfigured.
 - **NAT Gateway for outbound only:** private resources can pull updates without accepting inbound connections.
 - **Security groups reference each other** (e.g. DB-SG allows WEB-SG) rather than IP ranges, so rules stay tight as instances change.
-- **Least-privilege IAM:** <!-- add: what you did differently from root, and any policies you scoped -->
+- <!-- add: what you did differently from root, and any policies you scoped -->
 
 ## Skills demonstrated
 
@@ -60,7 +63,7 @@ AWS IAM · VPC design · Security groups and route tables · EC2 · Bastion arch
 
 ## Cost and cleanup
 
-<!-- Note which resources you stop or tear down between sessions (NAT Gateway bills hourly) -->
+* NAT Gateways bill hourly and can become expensive quickly, and Elastic IPs carry a similar hourly charge. Both were deprovisioned after use to preserve credits.<!-- Note which resources you stop or tear down between sessions (NAT Gateway bills hourly) -->
 
 ## Repo structure
 
