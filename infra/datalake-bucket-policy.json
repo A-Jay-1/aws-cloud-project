@@ -1,0 +1,110 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowGuardDutyToWriteFindings",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>*"
+        },
+        {
+            "Sid": "AllowGuardDutyToGetBucketLocation",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "guardduty.amazonaws.com"
+            },
+            "Action": "s3:GetBucketLocation",
+            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>*"
+        },
+        {
+            "Sid": "AllowCloudTrailToWriteLogs",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:x-amz-acl": "bucket-owner-full-control"
+                }
+            }
+        },
+        {
+            "Sid": "AllowCloudTrailToGetBucketAcl",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>*"
+        },
+        {
+            "Sid": "AWSCloudTrailAclCheck20150319-fcc60c53-7742-4940-a023-00363ce6df72",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>*",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "arn:aws:cloudtrail:us-east-1:<ACCOUNT-ID>:trail/projectx-prod-management-trail"
+                }
+            }
+        },
+        {
+            "Sid": "AWSCloudTrailWrite20150319-91901ebc-c8b3-4c81-9114-307da5d94a0e",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+	            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>/AWSLogs/<ACCOUNT-ID/*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:x-amz-acl": "bucket-owner-full-control",
+                    "AWS:SourceArn": "arn:aws:cloudtrail:us-east-1:<ACCOUNT-ID:trail/projectx-prod-management-trail"
+                }
+            }
+        },
+        {
+            "Sid": "AWSLogDeliveryWrite1",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "delivery.logs.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>/AWSLogs/<ACCOUNT-ID/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "<ACCOUNT-ID>",
+                    "s3:x-amz-acl": "bucket-owner-full-control"
+                },
+                "ArnLike": {
+                    "aws:SourceArn": "arn:aws:logs:us-east-1:<ACCOUNT-ID>:*"
+                }
+            }
+        },
+        {
+            "Sid": "AWSLogDeliveryAclCheck1",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "delivery.logs.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::projectx-prod-datalake-<BUCKET-NAME>*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "<ACCOUNT-ID>"
+                },
+                "ArnLike": {
+                    "aws:SourceArn": "arn:aws:logs:us-east-1:<ACCOUNT-ID>:*"
+                }
+            }
+        }
+    ]
+}
