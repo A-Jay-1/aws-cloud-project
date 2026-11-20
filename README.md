@@ -57,6 +57,8 @@ Built following Grant Collins' *Cloud & Attacks 101* (projectsecurity). Where I 
 | Recursive logging disabled                                    | Prevents a feedback loop of log writes generating more logs   | No visibility into activity on the data lake bucket itself  |
 | No CloudWatch Logs                                            | S3 as the single log destination, no duplicate ingestion cost | No real-time metric filters or alarms                       |
 | 14-day log retention                                          | Controls storage cost within the credit budget                | Limited forensic history, no long-term compliance retention |
+
+
 See [docs/05-monitoring-logging.md](docs/05-monitoring-logging.md) for detail on the logging decisions.
 ## Skills demonstrated
 

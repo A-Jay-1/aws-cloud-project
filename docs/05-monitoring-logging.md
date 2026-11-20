@@ -49,13 +49,6 @@ The bucket policy grants CloudTrail and VPC Flow Logs permission to write to the
 ![VPC Flow Logs](../screenshots/05-vpcflowlogs.png)
 
 
-- <!-- a GuardDuty sample finding generated and visible -->
-- <!-- rejected traffic visible in Flow Logs, such as a blocked SSH attempt -->
-
-<!-- One or two screenshots: the bucket prefixes, and a CloudTrail event or GuardDuty finding. Redact account ID and IPs. -->
-![Security data lake](../screenshots/monitoring/datalake.png)
-
-
 ## Production hardening
 
 - Enable S3 Object Lock or MFA delete so logs cannot be tampered, even for privileged users, with the right configurations.
